@@ -1,0 +1,29 @@
+id = "erdinc.space-description"
+name = "Space description"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+platforms = ["linux", "macos"]
+
+[[startup]]
+command = ["sh", "-c", "exec python3 \"$HERDR_PLUGIN_ROOT/apply.py\""]
+
+[[actions]]
+id = "apply"
+title = "Apply space descriptions"
+contexts = ["workspace"]
+command = ["sh", "-c", "exec python3 \"$HERDR_PLUGIN_ROOT/apply.py\""]
+
+[[actions]]
+id = "edit"
+title = "Edit space name and description"
+contexts = ["workspace"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin erdinc.space-description --entrypoint form --focus"]
+
+[[panes]]
+id = "form"
+# herdr requires a non-empty title; a border glyph blends into the frame
+title = "─"
+placement = "popup"
+width = 60
+height = 9
+command = ["sh", "-c", "exec python3 \"$HERDR_PLUGIN_ROOT/edit.py\""]
